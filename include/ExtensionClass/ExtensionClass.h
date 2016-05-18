@@ -83,6 +83,8 @@
 #include "Python.h"
 #include "import.h"
 
+#define Py_TPFLAGS_HAVE_CLASS 0
+
 /* Declarations for objects of type ExtensionClass */
 
 #define EC PyTypeObject
