@@ -772,10 +772,10 @@ ZopeSecurityPolicy_getattro(ZopeSecurityPolicy *self, PyObject *name)
 
     if (name_s[0] == '_') {
       if (! strcmp(name_s, "_ownerous")) {
-          return PyInt_FromLong(ownerous);
+          return PyLong_FromLong(ownerous);
       }
       else if (! strcmp(name_s, "_authenticated")) {
-          return PyInt_FromLong(authenticated);
+          return PyLong_FromLong(authenticated);
       }
     }
   }
@@ -986,7 +986,7 @@ static PyObject *ZopeSecurityPolicy_validate(PyObject *self, PyObject *args) {
 
 		if (p) 
                   {
-                    if (! PyInt_Check(p)) 
+                    if (! PyLong_Check(p)) 
                       {
                         if (PyDict_Check(p)) 
                           {
@@ -998,7 +998,7 @@ static PyObject *ZopeSecurityPolicy_validate(PyObject *self, PyObject *args) {
                               }
                             else
                               {
-                                ASSIGN(p, PyInt_FromLong(1));
+                                ASSIGN(p, PyLong_FromLong(1));
                                 if (p == NULL)
                                   goto err;
                               }
@@ -1028,7 +1028,7 @@ static PyObject *ZopeSecurityPolicy_validate(PyObject *self, PyObject *args) {
 		*/
 
 		if (roles == NULL) {
-			rval = PyInt_FromLong(1);
+			rval = PyLong_FromLong(1);
 			goto err;
 		}
 
@@ -1053,7 +1053,7 @@ static PyObject *ZopeSecurityPolicy_validate(PyObject *self, PyObject *args) {
 	*/
 
 	if (roles == Py_None) {
-		rval = PyInt_FromLong(1);
+		rval = PyLong_FromLong(1);
 		goto err;
 	}
         else
@@ -1062,7 +1062,7 @@ static PyObject *ZopeSecurityPolicy_validate(PyObject *self, PyObject *args) {
           i = PySequence_Contains(roles, Anonymous);
           if (i > 0)
             {
-              rval = PyInt_FromLong(1);
+              rval = PyLong_FromLong(1);
               goto err;
             }
           else if (i < 0)
@@ -1248,7 +1248,7 @@ static PyObject *ZopeSecurityPolicy_validate(PyObject *self, PyObject *args) {
                     Py_DECREF(proxy_roles);
 
                     if (contains > 0)
-                      rval = PyInt_FromLong(contains);
+                      rval = PyLong_FromLong(contains);
                     else if (contains == 0) {
 		      unauthErr(name, value);
                     }
@@ -1280,7 +1280,7 @@ static PyObject *ZopeSecurityPolicy_validate(PyObject *self, PyObject *args) {
             if (user == NULL) goto err;
             if (PyObject_IsTrue(user))
               {
-                rval = PyInt_FromLong(1);
+                rval = PyLong_FromLong(1);
                 Py_DECREF(user);
                 goto err;
               }
